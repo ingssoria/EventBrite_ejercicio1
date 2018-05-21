@@ -1,0 +1,24 @@
+<div class="container">
+  <div>
+    <div>
+      <span>{{mensaje}}</span>
+    </div>
+    <span>¿Quien adivina
+    <button (click)="iniciarJuegoPc()" [disabled]="juego.enEjecusion">TU</button> o
+    <button (click)="iniciarJuegoHumano()" [disabled]="juego.enEjecusion">YO</button>
+    ?</span>
+    <div *ngIf="juego.modo == 'PC'">
+      Tu turno: <input class="form-control" type="text" name="propuesta" [(ngModel)] = "jugador.n_propuesta" #propuesta="ngModel" [disabled]="juego.fin == true" />
+      <button (click)="jugar()" [disabled]="juego.fin == true">Evaluar</button>
+      <div *ngIf="juego.fin == false">Mi num es {{jugador.evaluacion}}</div>
+      <div *ngIf="juego.fin == true">Has acertado! Mi numero es:{{jugador.n_propuesta}}</div>
+    </div>
+    <div *ngIf="juego.modo == 'Humano'">Tu numero es: {{jugador.n_propuesta}} ?
+      <button (click)="jugar('mayor')" [disabled]="juego.fin == true">No, Es Mayor</button>
+      <button (click)="jugar('menor')" [disabled]="juego.fin == true">No, Es Menor</button>
+      <button (click)="jugar('igual')" [disabled]="juego.fin == true">Si</button>
+      <div *ngIf="juego.fin == true">He acertado! Tu numero es:{{jugador.n_incognito}}</div>
+    </div>
+    <button *ngIf="juego.fin == true" (click)="ngOnInit()">Vorver a Intentarlo</button>
+  </div>
+</div>
